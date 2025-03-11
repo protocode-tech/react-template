@@ -2,5 +2,5 @@
 
 set -e
 
-# Install vendors
-docker-compose run -u $(id -u):$(id -g) -it app npm install
+# Install vscode extension for typescript
+code --install-extension tomi.xasnippets

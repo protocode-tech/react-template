@@ -2,5 +2,5 @@
 
 set -e
 
-# Install vscode extension for typescript
-code --install-extension tomi.xasnippets
+# Install vendors
+docker-compose run --rm app npm install --yes

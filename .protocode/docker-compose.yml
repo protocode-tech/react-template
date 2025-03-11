@@ -4,14 +4,15 @@ services:
     app:
         image: node:16-alpine
         environment:
-            VIRTUAL_HOST: app.local
-            VIRTUAL_PORT: 3000
+            VIRTUAL_HOST: app-react-template.${ENVIRONMENT_URL} # Expose container
+            VIRTUAL_PORT: 3000 # Redirect requests from port 80 to port 3000
+        command: npm run dev # Start app compilation on container startup
         labels:
-            # Set aliases to use binaries within container from environment terminal
-            protocode.alias.node: "docker-compose run --rm -u $(id -u):$(id -g) -it app node"
-            protocode.alias.npm: "docker-compose run --rm -u $(id -u):$(id -g) -it app npm"
-            protocode.alias.npx: "docker-compose run --rm -u $(id -u):$(id -g) -it app npx"
-            protocode.alias.yarn: "docker-compose run --rm -u $(id -u):$(id -g) -it app yarn"
+            # Set aliases to use binaries in container directly from terminal
+            protocode.alias.node: "docker-compose run --rm -it app node" # Use "node" instead of "docker-compose run --rm -it app node"
+            protocode.alias.npm: "docker-compose run --rm -it app npm" # Same for npm, npx or yarn
+            protocode.alias.npx: "docker-compose run --rm -it app npx"
+            protocode.alias.yarn: "docker-compose run --rm -it app yarn"
         volumes:
             - '.:/app'
         working_dir: /app
